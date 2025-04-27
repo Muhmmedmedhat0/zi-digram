@@ -36,8 +36,35 @@
   --semi-circle-width: 700px;
   --semi-circle-height: 350px;
   
-  /* Spacing from semi-circle */
+  /* Card positioning variables */
   --card-offset: 40px;
+  
+  /* Card angles for positioning */
+  --card-angle-1: 65deg;  /* Outer left */
+  --card-angle-2: 43deg;  /* Middle left */
+  --card-angle-3: -22deg; /* Inner left */
+  --card-angle-4: 0deg;   /* Center */
+  --card-angle-5: 22deg;  /* Inner right */
+  --card-angle-6: -43deg; /* Middle right */
+  --card-angle-7: -65deg; /* Outer right */
+  
+  /* Vertical positioning factors (percentage of semi-circle height) */
+  --card-vertical-outer: 0.34;
+  --card-vertical-middle: 0.8;
+  --card-vertical-inner: 1.0;
+  --card-vertical-center: 1.0;
+  
+  /* Horizontal positioning factors (percentage of semi-circle width) */
+  --card-horizontal-outer: 0.13;
+  --card-horizontal-middle: 0.01;
+  --card-horizontal-inner: 0.62;
+  --card-horizontal-center: 0.5;
+  
+  /* Offset multipliers */
+  --offset-multiplier-outer: 1;
+  --offset-multiplier-middle: 0.8;
+  --offset-multiplier-inner: 0.3;
+  --offset-multiplier-center: 0.2;
 }
 
 /* Reset and base styles */
@@ -321,47 +348,47 @@ body {
   font-weight: bold;
 }
 
-/* Individual service card positioning - moved away from semi-circle */
+/* Individual service card positioning using dynamic variables */
 .sms-campaigns {
-  top: calc(var(--semi-circle-height) * 0.34 - var(--card-offset));
-  left: calc(var(--semi-circle-width) * -0.13 - var(--card-offset));
-  transform: rotate(65deg);
+  top: calc(var(--semi-circle-height) * var(--card-vertical-outer) - var(--card-offset) * var(--offset-multiplier-outer));
+  left: calc(-1 * var(--semi-circle-width) * var(--card-horizontal-outer) - var(--card-offset));
+  transform: rotate(var(--card-angle-1));
 }
 
 .email-campaigns {
-  top: calc(var(--semi-circle-height) * 0.8  - var(--card-offset) * 0.5);
-  left: calc(var(--semi-circle-width) * 0.01 - var(--card-offset) * 0.8 );
-  transform: rotate(43deg);
+  top: calc(var(--semi-circle-height) * var(--card-vertical-middle) - var(--card-offset) * var(--offset-multiplier-middle));
+  left: calc(var(--semi-circle-width) * var(--card-horizontal-middle) - var(--card-offset) * var(--offset-multiplier-middle));
+  transform: rotate(var(--card-angle-2));
 }
 
 .css {
-  top: calc(var(--semi-circle-height) * 1.0 - var(--card-offset) * 0.3);
-  left: calc(var(--semi-circle-width) * 0.62);
-  transform: rotate(-22deg);
+  top: calc(var(--semi-circle-height) * var(--card-vertical-inner) - var(--card-offset) * var(--offset-multiplier-inner));
+  left: calc(var(--semi-circle-width) * var(--card-horizontal-inner));
+  transform: rotate(var(--card-angle-3));
 }
 
 .evenue {
-  top: calc(var(--semi-circle-height) + var(--card-offset) * 0.2);
-  left: 40%;
-  /* transform: translateX(-50%); */
+  top: calc(var(--semi-circle-height) + var(--card-offset) * var(--offset-multiplier-center));
+  left: calc(var(--semi-circle-width) * var(--card-horizontal-center) - var(--card-size) / 2);
+  /* No rotation for center card */
 }
 
 .cyber-emissaries {
-  top: calc(var(--semi-circle-height) * 1.0 - var(--card-offset) * 0.3);
-  right: calc(var(--semi-circle-width) * 0.62);
-  transform: rotate(22deg);
+  top: calc(var(--semi-circle-height) * var(--card-vertical-inner) - var(--card-offset) * var(--offset-multiplier-inner));
+  right: calc(var(--semi-circle-width) * var(--card-horizontal-inner));
+  transform: rotate(var(--card-angle-5));
 }
 
 .zi-workshop {
-  top: calc(var(--semi-circle-height) * 0.8  - var(--card-offset) * 0.5);
-  right: calc(var(--semi-circle-width) * 0.01 - var(--card-offset) * 0.8 );
-  transform: rotate(-43deg);
+  top: calc(var(--semi-circle-height) * var(--card-vertical-middle) - var(--card-offset) * var(--offset-multiplier-middle));
+  right: calc(var(--semi-circle-width) * var(--card-horizontal-middle) - var(--card-offset) * var(--offset-multiplier-middle));
+  transform: rotate(var(--card-angle-6));
 }
 
 .lms-phishing {
-  top: calc(var(--semi-circle-height) * 0.34 - var(--card-offset));
-  right: calc(var(--semi-circle-width) * -0.13 - var(--card-offset));
-  transform: rotate(-65deg);
+  top: calc(var(--semi-circle-height) * var(--card-vertical-outer) - var(--card-offset) * var(--offset-multiplier-outer));
+  right: calc(-1 * var(--semi-circle-width) * var(--card-horizontal-outer) - var(--card-offset));
+  transform: rotate(var(--card-angle-7));
 }
 
 /* Path dots positioning - calculated based on semi-circle dimensions */
@@ -382,12 +409,12 @@ body {
 }
 
 .path-dot:nth-child(4) {
-  top: calc(var(--semi-circle-height) * 0.8 1);
+  top: calc(var(--semi-circle-height) * 0.71);
   left: 15%;
 }
 
 .path-dot:nth-child(5) {
-  top: calc(var(--semi-circle-height) * 0.8 2);
+  top: calc(var(--semi-circle-height) * 0.82);
   left: 83%;
 }
 
@@ -400,6 +427,14 @@ body {
     --semi-circle-width: 320px;
     --semi-circle-height: 200px;
     --card-offset: 20px;
+    
+    /* Adjust card angles for better mobile visibility */
+    --card-angle-1: 55deg;
+    --card-angle-2: 35deg;
+    --card-angle-3: -15deg;
+    --card-angle-5: 15deg;
+    --card-angle-6: -35deg;
+    --card-angle-7: -55deg;
   }
   
   body {
@@ -407,7 +442,7 @@ body {
   }
   
   .service-card {
-    font-size: 0.8 rem;
+    font-size: 0.8rem;
   }
 
   .service-icon {
@@ -428,31 +463,6 @@ body {
   .tech-icon {
     width: 40px;
     height: 40px;
-  }
-  
-  /* Adjust card rotation angles for better visibility on small screens */
-  .sms-campaigns {
-    transform: rotate(55deg);
-  }
-  
-  .email-campaigns {
-    transform: rotate(35deg);
-  }
-  
-  .css {
-    transform: rotate(-15deg);
-  }
-  
-  .cyber-emissaries {
-    transform: rotate(15deg);
-  }
-  
-  .zi-workshop {
-    transform: rotate(-35deg);
-  }
-  
-  .lms-phishing {
-    transform: rotate(-55deg);
   }
 }
 
