@@ -1,0 +1,521 @@
+/* Variables for consistent theming */
+:root {
+  /* Colors */
+  --color-primary: #d10000;
+  --color-secondary: #333;
+  --color-background: #f9eaed;
+  --color-text: #333;
+  --color-light: #fff;
+  --color-border: #ccc;
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  
+  /* Font sizes */
+  --font-xs: 0.9rem;
+  --font-sm: 1.2rem;
+  --font-md: 1.5rem;
+  --font-lg: 2rem;
+  --font-xl: 2.5rem;
+  
+  /* Border radius */
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-circle: 50%;
+  
+  /* Shadows */
+  --shadow-default: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  /* Component sizes */
+  --logo-size: 180px;
+  --badge-size: 50px;
+  --card-size: 150px;
+  --semi-circle-width: 700px;
+  --semi-circle-height: 350px;
+  
+  /* Spacing from semi-circle */
+  --card-offset: 40px;
+}
+
+/* Reset and base styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-lg);
+}
+
+/* Common utilities */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main container */
+.diagram-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Central logo section */
+.central-logo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+}
+
+.ai-badge {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  width: var(--badge-size);
+  height: var(--badge-size);
+  border-radius: var(--radius-circle);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto -20px;
+  position: relative;
+  z-index: 2;
+  font-size: var(--font-md);
+  font-weight: bold;
+}
+
+.ai-badge::before {
+  content: '';
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border: 2px dashed var(--color-light);
+  border-radius: var(--radius-circle);
+}
+
+.logo-circle {
+  background-color: var(--color-secondary);
+  color: var(--color-light);
+  width: var(--logo-size);
+  height: var(--logo-size);
+  border-radius: var(--radius-circle);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-xl);
+  font-weight: bold;
+}
+
+/* Semi-circle path */
+.semi-circle {
+  position: relative;
+  width: var(--semi-circle-width);
+  height: var(--semi-circle-height);
+  margin: calc(var(--logo-size) - 20px) auto 0;
+  border-bottom: 2px solid var(--color-border);
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+/* Path dots */
+.path-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-circle);
+}
+
+/* Service cards container */
+.service-cards {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+/* Service card base style */
+.service-card {
+  position: absolute;
+  width: var(--card-size);
+  height: var(--card-size);
+  background-color: var(--color-light);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-sm);
+  box-shadow: var(--shadow-default);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  z-index: 5;
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-circle);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+}
+
+.red-icon {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+}
+
+.dark-icon {
+  background-color: var(--color-secondary);
+  color: var(--color-light);
+}
+
+.service-title {
+  font-size: var(--font-xs);
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+/* Side elements */
+.side-element {
+  position: absolute;
+}
+
+/* App section */
+.app-section {
+  left: -20px;
+  top: calc(var(--semi-circle-height) + 125px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phone-mockup {
+  width: 100px;
+  height: 200px;
+  border: 10px solid var(--color-secondary);
+  border-radius: var(--radius-md);
+  background-color: var(--color-light);
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.phone-notch {
+  width: 40px;
+  height: 15px;
+  background-color: var(--color-secondary);
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.phone-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--color-primary);
+  font-weight: bold;
+  font-size: var(--font-xs);
+}
+
+.app-label {
+  background-color: var(--color-light);
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+/* VR and Kinect section */
+.vr-kinect-section {
+  right: 20px;
+  top: calc(var(--semi-circle-height) + 125px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.tech-icon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-light);
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-primary);
+}
+
+.tech-label {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+/* Bottom banner */
+.bottom-banner {
+  position: absolute;
+  bottom: calc(-1 * (var(--semi-circle-height) + 130px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 350px;
+  height: 100px;
+  background-color: var(--color-light);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-sm);
+}
+
+.banner-title {
+  color: var(--color-primary);
+  font-size: var(--font-md);
+  font-weight: bold;
+  margin-bottom: var(--spacing-xs);
+}
+
+.banner-subtitle {
+  color: var(--color-secondary);
+  font-weight: bold;
+}
+
+/* Individual service card positioning - moved away from semi-circle */
+.sms-campaigns {
+  top: calc(var(--semi-circle-height) * 0.34 - var(--card-offset));
+  left: calc(var(--semi-circle-width) * -0.13 - var(--card-offset));
+  transform: rotate(65deg);
+}
+
+.email-campaigns {
+  top: calc(var(--semi-circle-height) * 0.8  - var(--card-offset) * 0.5);
+  left: calc(var(--semi-circle-width) * 0.01 - var(--card-offset) * 0.8 );
+  transform: rotate(43deg);
+}
+
+.css {
+  top: calc(var(--semi-circle-height) * 1.0 - var(--card-offset) * 0.3);
+  left: calc(var(--semi-circle-width) * 0.62);
+  transform: rotate(-22deg);
+}
+
+.evenue {
+  top: calc(var(--semi-circle-height) + var(--card-offset) * 0.2);
+  left: 40%;
+  /* transform: translateX(-50%); */
+}
+
+.cyber-emissaries {
+  top: calc(var(--semi-circle-height) * 1.0 - var(--card-offset) * 0.3);
+  right: calc(var(--semi-circle-width) * 0.62);
+  transform: rotate(22deg);
+}
+
+.zi-workshop {
+  top: calc(var(--semi-circle-height) * 0.8  - var(--card-offset) * 0.5);
+  right: calc(var(--semi-circle-width) * 0.01 - var(--card-offset) * 0.8 );
+  transform: rotate(-43deg);
+}
+
+.lms-phishing {
+  top: calc(var(--semi-circle-height) * 0.34 - var(--card-offset));
+  right: calc(var(--semi-circle-width) * -0.13 - var(--card-offset));
+  transform: rotate(-65deg);
+}
+
+/* Path dots positioning - calculated based on semi-circle dimensions */
+.path-dot:nth-child(1) {
+  top: calc(var(--semi-circle-height) * 0.92);
+  left: 32%;
+}
+
+.path-dot:nth-child(2) {
+  top: calc(var(--semi-circle-height) * 0.99);
+  left: 50%;
+  display: none;
+}
+
+.path-dot:nth-child(3) {
+  top: calc(var(--semi-circle-height) * 0.92);
+  left: 66%;
+}
+
+.path-dot:nth-child(4) {
+  top: calc(var(--semi-circle-height) * 0.8 1);
+  left: 15%;
+}
+
+.path-dot:nth-child(5) {
+  top: calc(var(--semi-circle-height) * 0.8 2);
+  left: 83%;
+}
+
+/* Responsive design - mobile first approach */
+/* Extra small devices (phones) */
+@media (max-width: 576px) {
+  :root {
+    --logo-size: 120px;
+    --card-size: 90px;
+    --semi-circle-width: 320px;
+    --semi-circle-height: 200px;
+    --card-offset: 20px;
+  }
+  
+  body {
+    padding: var(--spacing-sm);
+  }
+  
+  .service-card {
+    font-size: 0.8 rem;
+  }
+
+  .service-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .bottom-banner {
+    width: 280px;
+    height: 80px;
+  }
+
+  .phone-mockup {
+    width: 80px;
+    height: 160px;
+  }
+  
+  .tech-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  /* Adjust card rotation angles for better visibility on small screens */
+  .sms-campaigns {
+    transform: rotate(55deg);
+  }
+  
+  .email-campaigns {
+    transform: rotate(35deg);
+  }
+  
+  .css {
+    transform: rotate(-15deg);
+  }
+  
+  .cyber-emissaries {
+    transform: rotate(15deg);
+  }
+  
+  .zi-workshop {
+    transform: rotate(-35deg);
+  }
+  
+  .lms-phishing {
+    transform: rotate(-55deg);
+  }
+}
+
+/* Small devices (landscape phones) */
+@media (min-width: 577px) and (max-width: 767px) {
+  :root {
+    --logo-size: 140px;
+    --card-size: 110px;
+    --semi-circle-width: 450px;
+    --semi-circle-height: 250px;
+    --card-offset: 25px;
+  }
+  
+  .service-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 768px) and (max-width: 991px) {
+  :root {
+    --logo-size: 160px;
+    --card-size: 130px;
+    --semi-circle-width: 580px;
+    --semi-circle-height: 290px;
+    --card-offset: 30px;
+  }
+  
+  .service-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Large devices (desktops) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  :root {
+    --logo-size: 170px;
+    --card-size: 140px;
+    --semi-circle-width: 650px;
+    --semi-circle-height: 325px;
+    --card-offset: 35px;
+  }
+  
+  .service-icon {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* Extra large devices (large desktops) */
+@media (min-width: 1200px) {
+  /* Default values are already set for large screens */
+}
+
+/* Print styles */
+@media print {
+  body {
+    background-color: white;
+  }
+  
+  .diagram-container {
+    page-break-inside: avoid;
+  }
+}
